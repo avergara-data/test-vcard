@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Agregar Contacto</title>
+</head>
+<body>
+  <button onclick="descargarContacto()">Guardar Contacto</button>
+
+  <script>
+    function descargarContacto() {
+      const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:Juan Pérez
+TEL;TYPE=CELL:1234567890
+EMAIL:juan@example.com
+END:VCARD`;
+
+      const blob = new Blob([vcard], { type: 'text/vcard' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'contacto.vcf';
+      a.click();
+
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
